@@ -1,6 +1,6 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf-8&serverTimezone=CTT
     username: root
     password: root
@@ -10,11 +10,10 @@ spring:
     show-sql: true
 
 logging:
-  level:.
+  level:
     root: warn
     com.zjd: info
   file:
-    name: log/blog-pro.log
-
+    name: log/blog-dev.log
 server:
   port: 8081
