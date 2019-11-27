@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class LogAspect {
 
     /*内部类，用于接收请求数据，其实用结构体更好，但是java没有*/
-    private class RequestLog {
+    private static class RequestLog {
         private String url;
         private String ip;
         private String classMethod;
