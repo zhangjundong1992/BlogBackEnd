@@ -1,6 +1,6 @@
 package com.zjd.blog.web.admin;
 
-import com.zjd.blog.po.User;
+import com.zjd.blog.dao.po.User;
 import com.zjd.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,11 +19,13 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    /*登录页*/
     @GetMapping()
     public String loginPage() {
         return "admin/login";
     }
 
+    /*登录验证*/
     @PostMapping("/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
@@ -36,12 +38,12 @@ public class LoginController {
             return "admin/index";
         }
         else {
-            /*todo,不清楚为啥添加不进去*/
             attributes.addFlashAttribute("message", "用户名或密码错误");
             return "redirect:/admin";
         }
     }
 
+    /*登出*/
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("user");

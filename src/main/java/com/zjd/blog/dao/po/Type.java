@@ -1,21 +1,23 @@
-package com.zjd.blog.po;
+package com.zjd.blog.dao.po;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "t_tag")
-public class Tag {
+@Table(name = "t_type")
+public class Type {
     @Id
     @GeneratedValue
     private long id;
+    @NotBlank(message = "分类名称不能为空")
     private String name;
 
-    @ManyToMany(mappedBy = "tags")
-    private List<Blog> blogs= new ArrayList<>();
+    @OneToMany(mappedBy = "type")
+    private List<Blog> blogs = new ArrayList<>();
 
-    public Tag() {
+    public Type() {
     }
 
     public long getId() {
@@ -44,7 +46,7 @@ public class Tag {
 
     @Override
     public String toString() {
-        return "Tag{" +
+        return "Type{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

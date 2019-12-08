@@ -30,3 +30,4 @@ build/
 ### VS Code ###
 .vscode/
 log/blog-dev.log.2019-11-20.0
+*.log
