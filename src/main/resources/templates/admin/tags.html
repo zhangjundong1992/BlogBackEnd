@@ -3,20 +3,19 @@
 <head th:replace="admin/fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>分类新增</title>
+    <title>标签管理</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <link rel="stylesheet" href="../../static/css/me.css">
-    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css">
 </head>
 <body>
     <!--导航 -->
-    <nav th:replace="admin/fragments :: menu(2)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <nav th:replace="admin/fragments :: menu(3)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
         <div class="ui container">
             <div class="ui inverted secondary stackable menu">
                 <h2 class="ui teal header item">管理后台</h2>
                 <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i> 首页</a>
                 <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
-                <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+                <a href="#" class="active m-item item m-mobile-hide"><i class="tags icon"></i> 标签</a>
                 <div class="m-item m-mobile-hide right menu">
                     <div class="ui dropdown item">
                         <div class="text">
@@ -40,53 +39,58 @@
     <div class="ui attached pointing menu">
         <div class="ui container">
             <div class="right menu">
-                <a href="#" th:href="@{/admin/types/input}" class="active teal item">新增</a>
-                <a href="#" th:href="@{/admin/types}" class=" item">列表</a>
+                <a href="#" th:href="@{/admin/tags/input}" class="item">新增</a>
+                <a href="#" th:href="@{/admin/tags}" class="active teal item">列表</a>
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
     <!--中间内容-->
-    <div class="m-container m-padded-tb-massive m-padded-lr-massive">
+    <div class="m-container m-padded-tb-massive">
         <div class="ui container">
-            <form action="#" method="post" th:object="${type}"
-                  th:action="*{id}==0 ? @{/admin/types} :   @{/admin/types/{id}(id=*{id})}  " class="ui form">
-                <input type="hidden" name="id" th:value="*{id}">
-                <!--分类名称-->
-                <div class="required field">
-                    <div class="ui labeled input">
-                        <label class="ui teal basic label">名称</label>
-                        <input type="text" name="name" placeholder="分类名称" th:value="*{name}">
-                    </div>
-                </div>
-                <div class="ui mini error message"></div>
-                <!--/*/
-                <div class="ui negative message" th:if="${#fields.hasErrors('name')}">
-                    <i class="close icon"></i>
-                    <div class="header">验证失败</div>
-                    <p th:errors="*{name}">提交信息不符合规则</p>
-                </div>
-                 /*/-->
-                <!--按钮-->
-                <div class="ui right aligned container">
-                    <button type="button" class="ui button " onclick="window.history.go(-1)">返回</button>
-                    <button class="ui teal submit button">提交</button>
-                </div>
-
-
-            </form>
+            <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                <i class="close icon"></i>
+                <div class="header">提示：</div>
+                <p th:text="${message}">恭喜，操作成功！</p>
+            </div>
+            <!--分类列表-->
+            <table class="ui celled table">
+                <!--表头-->
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>名称</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <!--内容-->
+                <tbody>
+                <tr th:each="tag,iterStart:${page.content}">
+                    <td th:text="${iterStart.count}">1</td>
+                    <td th:text="${tag.name}">认知升级</td>
+                    <td>
+                        <a href="#" th:href="@{/admin/tags/{id}/input(id=${tag.id})}"
+                           class="ui mini teal basic button">编辑</a>
+                        <a href="#" th:href="@{/admin/tags/{id}/delete(id=${tag.id})}"
+                           class="ui mini orange basic button">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+                <!--底部-->
+                <tfoot>
+                <tr>
+                    <th colspan="6">
+                        <div class="ui mini  pagination menu" th:if="${page.totalPages}>1">
+                            <a th:href="@{/admin/tags(page=${page.number}-1)}" class="item" th:unless="${page.first}">上一页</a>
+                            <a th:href="@{/admin/tags(page=${page.number}+1)}" class="item" th:unless="${page.last}">下一页</a>
+                        </div>
+                        <a th:href="@{/admin/tags/input}" class="ui mini right floated teal basic button">新增</a>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <br>
     <br>
     <!--底部-->
@@ -128,6 +132,7 @@
             <p class="m-text-thin m-spaced m-darkgray">Copyright © 2019 Blog Designed by ZJD</p>
         </div>
     </footer>
+
     <!--JS-->
     <!--/*/<th:block th:replace="fragments :: script">/*/-->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
@@ -137,20 +142,17 @@
         $('#menuToggle').click(function () {
             $('.m-item').toggleClass('m-mobile-hide');
         });
-        $('.ui.dropdown').dropdown({
-            on: 'hover'
-        });
-        $('.ui.form').form({
-            fields: {
-                title: {
-                    identifier: 'name',
-                    rules: [{
-                        type: 'empty',
-                        prompt: '请输入分类名称'
-                    }]
-                }
-            }
-        })
+        $('.ui.dropdown')
+            .dropdown({
+                on: 'hover'
+            });
+        $('.message .close')
+            .on('click', function () {
+                $(this)
+                    .closest('.message')
+                    .transition('fade');
+            });
+
     </script>
 </body>
 </html>
