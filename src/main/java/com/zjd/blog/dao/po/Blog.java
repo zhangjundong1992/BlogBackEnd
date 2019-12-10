@@ -8,7 +8,6 @@ import java.util.List;
 @Entity
 @Table(name = "t_blog")
 public class Blog {
-
     @Id
     @GeneratedValue
     private long id;
@@ -21,6 +20,7 @@ public class Blog {
     private boolean shareable;
     private boolean commentable;
     private boolean publishable;
+    private boolean recommended;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     @Temporal(TemporalType.TIMESTAMP)
@@ -119,6 +119,14 @@ public class Blog {
 
     public void setPublishable(boolean publishable) {
         this.publishable = publishable;
+    }
+
+    public boolean isRecommended() {
+        return recommended;
+    }
+
+    public void setRecommended(boolean recommended) {
+        this.recommended = recommended;
     }
 
     public Date getCreateTime() {
