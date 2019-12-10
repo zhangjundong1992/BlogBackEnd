@@ -58,28 +58,33 @@
                     </div>
                     <!--分类-->
                     <div class="field">
-                        <div class="ui selection dropdown">
-                            <input type="hidden" name="typeId">
-                            <div class="dropdown icon"></div>
-                            <div class="default text">分类</div>
-                            <div class="menu">
-                                <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}" th:text="${type.name}">错误日志</div>
-                                <!--/*-->
-                                <div class="item" data-value="2">开发者手册</div>
-                                <!--*/-->
+                        <div class="ui labeled action input">
+                            <div class="ui type selection dropdown">
+                                <input type="hidden" name="typeId">
+                                <div class="dropdown icon"></div>
+                                <div class="default text">分类</div>
+                                <div class="menu">
+                                    <div th:each="type : ${types}" class="item" data-value="1"
+                                         th:data-value="${type.id}"
+                                         th:text="${type.name}">错误日志
+                                    </div>
+                                </div>
                             </div>
+                            <button id="clear-btn" class="ui compact button">clear</button>
                         </div>
                     </div>
                     <!--check box-->
                     <div class="field">
-                        <div class="ui checkbos">
+                        <div class="ui checkbox">
                             <input type="checkbox" id="recommended" name="recommended">
-                            <label for="recommended">推荐</label>
+                            <label for="recommended">只看推荐</label>
                         </div>
                     </div>
                     <!--按钮-->
                     <div class="field">
-                        <button type="button" id="search-btn" class="ui mini teal basic button"><i class="search icon"></i>搜索</button>
+                        <button type="button" id="search-btn" class="ui mini teal basic button"><i
+                                class="search icon"></i>搜索
+                        </button>
                     </div>
                 </div>
             </div>
@@ -93,6 +98,7 @@
                         <th>标题</th>
                         <th>类型</th>
                         <th>推荐</th>
+                        <th>发布</th>
                         <th>更新时间</th>
                         <th>操作</th>
                     </tr>
@@ -104,6 +110,7 @@
                         <td th:text="${blog.title}">刻意联系</td>
                         <td th:text="${blog.type.name}">认知升级</td>
                         <td th:text="${blog.recommended} ? '是':'否'">是</td>
+                        <td th:text="${blog.publishable} ? '已发布':'草稿'">草稿</td>
                         <td th:text="${blog.updateTime}">2019-11-14</td>
                         <td>
                             <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}"
@@ -116,7 +123,7 @@
                     <!--底部-->
                     <tfoot>
                     <tr>
-                        <th colspan="6">
+                        <th colspan="7">
                             <div class="ui mini  pagination menu" th:if="${page.totalPages}>1">
                                 <a onclick="page(this)" th:attr="data-page = ${page.number}-1" class="item"
                                    th:unless="${page.first}">上一页</a>
@@ -128,6 +135,11 @@
                     </tr>
                     </tfoot>
                 </table>
+                <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                    <i class="close icon"></i>
+                    <div class="header">提示：</div>
+                    <p th:text="${message}">恭喜，操作成功！</p>
+                </div>
             </div>
         </div>
     </div>
@@ -192,8 +204,17 @@
             loaddata();
         }
 
+        $('#clear-btn')
+            .on('click', function () {
+                $('.ui.type.dropdown')
+                    .dropdown('clear')
+                ;
+            })
+        ;
+
+
         $("#search-btn").click(function () {
-            // $("[name='page']").val(0);
+            $("[name='page']").val(0);
             loaddata();
         });
 
@@ -205,6 +226,13 @@
                 page: $("[name='page']").val()
             });
         }
+
+        $('.message .close')
+            .on('click', function () {
+                $(this)
+                    .closest('.message')
+                    .transition('fade');
+            });
     </script>
 </body>
 </html>

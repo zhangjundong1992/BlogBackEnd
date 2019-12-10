@@ -12,6 +12,8 @@ public class Blog {
     @GeneratedValue
     private long id;
     private String title;
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
     private String content;
     private String firstPicture;
     private String flag;
@@ -28,6 +30,17 @@ public class Blog {
 
     @ManyToOne
     private Type type;
+
+    @Transient
+    private String tagIds;
+
+    public String getTagIds() {
+        return tagIds;
+    }
+
+    public void setTagIds(String tagIds) {
+        this.tagIds = tagIds;
+    }
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Tag> tags = new ArrayList<>();
