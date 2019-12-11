@@ -1,4 +1,4 @@
-package com.zjd.blog.dao.po;
+package com.zjd.blog.po;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 public class Tag {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String name;
 
     @ManyToMany(mappedBy = "tags")
@@ -18,11 +18,11 @@ public class Tag {
     public Tag() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

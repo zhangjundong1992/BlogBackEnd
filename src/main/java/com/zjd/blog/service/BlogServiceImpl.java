@@ -2,8 +2,8 @@ package com.zjd.blog.service;
 
 import com.zjd.blog.NotFoundException;
 import com.zjd.blog.dao.BlogRepository;
-import com.zjd.blog.dao.po.Blog;
-import com.zjd.blog.dao.po.Type;
+import com.zjd.blog.po.Blog;
+import com.zjd.blog.po.Type;
 import com.zjd.blog.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,10 +61,16 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     @Override
     public Blog saveBlog(Blog blog) {
-        blog.setCreateTime(new Date());
-        blog.setUpdateTime(new Date());
-        blog.setCountView(0);
+        if (blog.getId() == null) {/*新增*//*todo，不晓得可以不可以*/
+            blog.setCreateTime(new Date());
+            blog.setUpdateTime(new Date());
+            blog.setCountView(0);
+        }
+        else {/*修改*/
+            blog.setUpdateTime(new Date());
+        }
         return blogRepository.save(blog);
+
     }
 
     @Transactional

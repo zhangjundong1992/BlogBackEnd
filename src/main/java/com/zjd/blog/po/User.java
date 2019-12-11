@@ -1,4 +1,4 @@
-package com.zjd.blog.dao.po;
+package com.zjd.blog.po;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String nickname;
     private String username;
     private String password;
@@ -28,11 +28,11 @@ public class User {
     public User() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

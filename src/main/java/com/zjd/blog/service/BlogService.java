@@ -1,6 +1,6 @@
 package com.zjd.blog.service;
 
-import com.zjd.blog.dao.po.Blog;
+import com.zjd.blog.po.Blog;
 import com.zjd.blog.vo.BlogQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

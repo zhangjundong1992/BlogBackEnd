@@ -1,6 +1,6 @@
 package com.zjd.blog.service;
 
-import com.zjd.blog.dao.po.User;
+import com.zjd.blog.po.User;
 
 
 public interface UserService {

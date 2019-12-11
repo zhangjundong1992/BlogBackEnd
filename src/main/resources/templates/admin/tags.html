@@ -35,24 +35,10 @@
             <i class="sidebar icon"></i>
         </a>
     </nav>
-    <!--二级导航-->
-    <div class="ui attached pointing menu">
-        <div class="ui container">
-            <div class="right menu">
-                <a href="#" th:href="@{/admin/tags/input}" class="item">新增</a>
-                <a href="#" th:href="@{/admin/tags}" class="active teal item">列表</a>
-            </div>
-        </div>
-    </div>
 
     <!--中间内容-->
     <div class="m-container m-padded-tb-massive">
         <div class="ui container">
-            <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
-                <i class="close icon"></i>
-                <div class="header">提示：</div>
-                <p th:text="${message}">恭喜，操作成功！</p>
-            </div>
             <!--分类列表-->
             <table class="ui celled table">
                 <!--表头-->
@@ -89,6 +75,12 @@
                 </tr>
                 </tfoot>
             </table>
+            <!--操作提示-->
+            <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                <i class="close icon"></i>
+                <div class="header">提示：</div>
+                <p th:text="${message}">恭喜，操作成功！</p>
+            </div>
         </div>
     </div>
     <br>

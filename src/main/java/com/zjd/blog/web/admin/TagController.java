@@ -1,7 +1,6 @@
 package com.zjd.blog.web.admin;
 
-import com.zjd.blog.dao.po.Tag;
-import com.zjd.blog.dao.po.Type;
+import com.zjd.blog.po.Tag;
 import com.zjd.blog.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +26,7 @@ public class TagController {
 
     //标签页面
     @GetMapping("/tags")
-    public String types(@PageableDefault(size = 5, sort = {"id"}, direction = Sort.Direction.DESC)
+    public String types(@PageableDefault(size = 6, sort = {"id"}, direction = Sort.Direction.DESC)
                                 Pageable pageable, Model model) {
         model.addAttribute("page", tagService.listTag(pageable));
         return "admin/tags";

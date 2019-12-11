@@ -1,7 +1,7 @@
 package com.zjd.blog.web.admin;
 
-import com.zjd.blog.dao.po.Blog;
-import com.zjd.blog.dao.po.User;
+import com.zjd.blog.po.Blog;
+import com.zjd.blog.po.User;
 import com.zjd.blog.service.BlogService;
 import com.zjd.blog.service.TagService;
 import com.zjd.blog.service.TypeService;
@@ -13,10 +13,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.thymeleaf.expression.Ids;
 
 import javax.servlet.http.HttpSession;
 
@@ -37,7 +37,7 @@ public class BlogController {
 
     /*博客列表*/
     @GetMapping("/blogs")
-    public String blogs(@PageableDefault(size = 5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String blogs(@PageableDefault(size = 6, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                         BlogQuery blog, Model model) {
         model.addAttribute("types", typeService.listType());
         model.addAttribute("page", blogService.listBlog(pageable, blog));
@@ -46,7 +46,7 @@ public class BlogController {
 
     /*检索*/
     @PostMapping("/blogs/search")
-    public String search(@PageableDefault(size = 5, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
+    public String search(@PageableDefault(size = 6, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                          BlogQuery blog, Model model) {
         model.addAttribute("page", blogService.listBlog(pageable, blog));
         return "admin/blogs :: blogList";
@@ -61,7 +61,18 @@ public class BlogController {
         return INPUT;
     }
 
-    /*新增提交*/
+    /*修改跳转*/
+    @GetMapping("/blogs/{id}/input")
+    public String editInput(@PathVariable Long id, Model model) {
+        model.addAttribute("types", typeService.listType());
+        model.addAttribute("tags", tagService.listTag());
+        Blog blog = blogService.getBlog(id);
+        blog.init();/*把tagIds转换成前端可以识别的格式*/
+        model.addAttribute("blog", blog);
+        return INPUT;
+    }
+
+    /*新增提交、修改提交共用*/
     @PostMapping("/blogs")
     public String post(Blog blog, RedirectAttributes attributes, HttpSession session) {
         blog.setUser((User) session.getAttribute("user"));
@@ -77,5 +88,14 @@ public class BlogController {
         }
         return REDIRECT_LIST;
     }
+
+    @GetMapping("blogs/{id}/delete")
+    public String delete(@PathVariable Long id, RedirectAttributes attributes) {
+        blogService.deleteBlog(id);
+        attributes.addFlashAttribute("message", "删除成功");
+        return REDIRECT_LIST;
+    }
+
+
 
 }

@@ -1,4 +1,4 @@
-package com.zjd.blog.dao.po;
+package com.zjd.blog.po;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -10,7 +10,7 @@ import java.util.List;
 public class Type {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     @NotBlank(message = "分类名称不能为空")
     private String name;
 
@@ -20,11 +20,11 @@ public class Type {
     public Type() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
