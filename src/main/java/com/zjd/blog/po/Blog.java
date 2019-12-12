@@ -27,27 +27,15 @@ public class Blog {
     private Date createTime;
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
-
     @ManyToOne
     private Type type;
-
     @Transient
     private String tagIds;
-
-    public String getTagIds() {
-        return tagIds;
-    }
-
-    public void setTagIds(String tagIds) {
-        this.tagIds = tagIds;
-    }
-
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Tag> tags = new ArrayList<>();
-
+    private String description;
     @ManyToOne
     private User user;
-
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments = new ArrayList<>();
 
@@ -174,6 +162,22 @@ public class Blog {
         this.tags = tags;
     }
 
+    public String getTagIds() {
+        return tagIds;
+    }
+
+    public void setTagIds(String tagIds) {
+        this.tagIds = tagIds;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public User getUser() {
         return user;
     }
@@ -202,13 +206,15 @@ public class Blog {
             for (Tag tag : tags) {
                 if (flag) {
                     ids.append(",");
-                } else {
+                }
+                else {
                     flag = true;
                 }
                 ids.append(tag.getId());
             }
             return ids.toString();
-        } else {
+        }
+        else {
             return tagIds;
         }
     }
@@ -226,8 +232,15 @@ public class Blog {
                 ", shareable=" + shareable +
                 ", commentable=" + commentable +
                 ", publishable=" + publishable +
+                ", recommended=" + recommended +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", type=" + type +
+                ", tagIds='" + tagIds + '\'' +
+                ", tags=" + tags +
+                ", description='" + description + '\'' +
+                ", user=" + user +
+                ", comments=" + comments +
                 '}';
     }
 }

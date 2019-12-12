@@ -44,11 +44,11 @@
                 <input type="hidden" name="page">
                 <div class="inline fields">
                     <!--标题-->
-                    <div class="field">
+                    <div class="field m-mobile-margin ">
                         <input type="text" name="title" placeholder="标题">
                     </div>
                     <!--分类-->
-                    <div class="field">
+                    <div class="field m-mobile-margin ">
                         <div class="ui labeled action input">
                             <div class="ui type selection dropdown">
                                 <input type="hidden" name="typeId">
@@ -65,14 +65,14 @@
                         </div>
                     </div>
                     <!--check box-->
-                    <div class="field">
+                    <div class="field m-mobile-margin ">
                         <div class="ui checkbox">
                             <input type="checkbox" id="recommended" name="recommended">
                             <label for="recommended">只看推荐</label>
                         </div>
                     </div>
                     <!--按钮-->
-                    <div class="field">
+                    <div class="field m-mobile-margin ">
                         <button type="button" id="search-btn" class="ui mini teal basic button"><i
                                 class="search icon"></i>搜索
                         </button>
@@ -81,7 +81,7 @@
             </div>
             <div id="table-container">
                 <!--文章列表-->
-                <table th:fragment="blogList" class="ui compact teal table">
+                <table th:fragment="blogList" class="ui celled teal table">
                     <!--表头-->
                     <thead>
                     <tr>
@@ -121,6 +121,7 @@
                                 <a onclick="page(this)" th:attr="data-page = ${page.number}+1" class="item"
                                    th:unless="${page.last}">下一页</a>
                             </div>
+                            <!--todo,手机端自适应在没有上下页的情况下会有问题-->
                             <a th:href="@{/admin/blogs/input}" class="ui mini right floated teal basic button">新增</a>
                         </th>
                     </tr>
