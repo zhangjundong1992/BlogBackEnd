@@ -86,7 +86,7 @@
             <div class="ui attached segment ">
                 <!--分类-->
                 <div class="ui right aligned basic segment m-padded-tb-mini">
-                    <div class="ui teal basic label" th:text="${blog.type.name}">认知升级</div>
+                    <a class="ui teal basic label" target="_blank" th:href="@{/types/{id}(id=${blog.type.id})}" th:text="${blog.type.name}">认知升级</a>
                 </div>
                 <!--标题-->
                 <h2 class="ui center aligned header" th:text="${blog.title}">TYPO</h2>
@@ -98,9 +98,9 @@
                 </div>
                 <!--标签-->
                 <div class="m-padded-lr-responsive">
-                    <div class="ui basic teal left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">
+                    <a th:href="@{/tags/{id}(id=${tag.id})}" target="_blank" class="ui basic teal left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">
                         方法论
-                    </div>
+                    </a>
                 </div>
                 <!--赞赏-->
                 <div class="ui center aligned basic segment">
