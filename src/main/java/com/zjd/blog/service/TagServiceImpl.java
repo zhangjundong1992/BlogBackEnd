@@ -26,7 +26,6 @@ public class TagServiceImpl implements TagService {
         return tagRepository.save(tag);
     }
 
-
     @Override
     public Tag getTag(long id) {
         return tagRepository.getOne(id);
@@ -37,18 +36,18 @@ public class TagServiceImpl implements TagService {
         return tagRepository.findByName(name);
     }
 
-
+    /*分页查询*/
     @Override
     public Page<Tag> listTag(Pageable pageable) {
         return tagRepository.findAll(pageable);
     }
-
 
     @Override
     public List<Tag> listTag() {
         return tagRepository.findAll();
     }
 
+    /*根据id列表查询*/
     @Override
     public List<Tag> listTag(String ids) {
         return tagRepository.findAllById(convertToList(ids));
@@ -68,8 +67,8 @@ public class TagServiceImpl implements TagService {
     /*获取文章数目最多的tag列表*/
     @Override
     public List<Tag> listTagTop(Integer size) {
-        Sort sort = Sort.by(Sort.Direction.DESC,"blogs.size");
-        Pageable pageable = PageRequest.of (0,size,sort);
+        Sort sort = Sort.by(Sort.Direction.DESC, "blogs.size");
+        Pageable pageable = PageRequest.of(0, size, sort);
         return tagRepository.findTop(pageable);
     }
 

@@ -4,6 +4,7 @@ import com.zjd.blog.NotFoundException;
 import com.zjd.blog.dao.BlogRepository;
 import com.zjd.blog.po.Blog;
 import com.zjd.blog.po.Type;
+import com.zjd.blog.util.MarkdownUtils;
 import com.zjd.blog.util.MyBeanUtils;
 import com.zjd.blog.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
@@ -35,9 +36,23 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.getOne(id);
     }
 
+    /*将markdown转换为html*/
+    @Override
+    public Blog getAndConvert(Long id) {
+        Blog blog = blogRepository.getOne(id);
+        if (blog == null) {
+            throw new NotFoundException("该博客不存在");
+        }
+        Blog b = new Blog();/*复制一份新的，防止改变原数据*/
+        BeanUtils.copyProperties(blog, b);
+        String content = b.getContent();
+        b.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+        return b;
+    }
+
+    /*筛选，根据题目、分类、标签等条件查询*/
     @Override
     public Page<Blog> listBlog(Pageable pageable, BlogQuery blog) {
-
         return blogRepository.findAll(new Specification<Blog>() {
             /*处理动态查询条件*/
             @Override
@@ -61,14 +76,22 @@ public class BlogServiceImpl implements BlogService {
         }, pageable);
     }
 
+    /*分页查询*/
     @Override
     public Page<Blog> listBlog(Pageable pageable) {
         return blogRepository.findAll(pageable);
     }
 
+    /*全局搜索*/
+    @Override
+    public Page<Blog> listBlog(String query, Pageable pageable) {
+        return blogRepository.findByQuery(query, pageable);
+    }
+
+    /*按更新时间查询博客*/
     @Override
     public List<Blog> listRecommendTop(Integer size) {
-        Sort sort = Sort.by(Sort.Direction.DESC,"updateTime");
+        Sort sort = Sort.by(Sort.Direction.DESC, "updateTime");
         Pageable pageable = PageRequest.of(0, size, sort);
         return blogRepository.findTop(pageable);
     }
