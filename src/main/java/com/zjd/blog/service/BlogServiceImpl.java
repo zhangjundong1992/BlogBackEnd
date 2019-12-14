@@ -1,6 +1,6 @@
 package com.zjd.blog.service;
 
-import com.zjd.blog.NotFoundException;
+import com.zjd.blog.exception.NotFoundException;
 import com.zjd.blog.dao.BlogRepository;
 import com.zjd.blog.po.Blog;
 import com.zjd.blog.po.Type;

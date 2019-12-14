@@ -1,6 +1,6 @@
 package com.zjd.blog.service;
 
-import com.zjd.blog.NotFoundException;
+import com.zjd.blog.exception.NotFoundException;
 import com.zjd.blog.dao.TypeRepository;
 import com.zjd.blog.po.Type;
 import org.springframework.beans.BeanUtils;

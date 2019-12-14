@@ -1,6 +1,6 @@
 package com.zjd.blog.service;
 
-import com.zjd.blog.NotFoundException;
+import com.zjd.blog.exception.NotFoundException;
 import com.zjd.blog.dao.TagRepository;
 import com.zjd.blog.po.Tag;
 import org.springframework.beans.BeanUtils;

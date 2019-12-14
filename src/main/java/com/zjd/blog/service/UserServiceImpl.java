@@ -2,6 +2,7 @@ package com.zjd.blog.service;
 
 import com.zjd.blog.dao.UserRepository;
 import com.zjd.blog.po.User;
+import com.zjd.blog.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User checkUser(String username, String password) {
-        return userRepository.findAllByUsernameAndPassword(username, password);
+        return userRepository.findAllByUsernameAndPassword(username, MD5Utils.code(password));
     }
 }
