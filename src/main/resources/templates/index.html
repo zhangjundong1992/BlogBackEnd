@@ -75,7 +75,7 @@
                                                         <img src="https://picsum.photos/100/100"
                                                              th:src="@{${blog.user.avatar}}" alt=""
                                                              class="ui avatar image">
-                                                        <div class="content"><a href="#" class="header"
+                                                        <div class="content"><a href="#" th:href="@{/about}" target="_blank" class="header"
                                                                                 th:text="${blog.user.nickname}">张俊栋</a>
                                                         </div>
                                                     </div>

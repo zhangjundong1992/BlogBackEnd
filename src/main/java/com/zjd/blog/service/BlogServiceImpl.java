@@ -38,6 +38,11 @@ public class BlogServiceImpl implements BlogService {
         if (blog == null) {
             throw new NotFoundException("该博客不存在");
         }
+
+        /*更新浏览次数*/
+        blog.setCountView(blog.getCountView() + 1);
+        blogRepository.save(blog);
+
         Blog b = new Blog();/*复制一份新的，防止改变原数据*/
         BeanUtils.copyProperties(blog, b);
         String content = b.getContent();

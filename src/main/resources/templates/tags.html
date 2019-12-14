@@ -81,8 +81,8 @@
                                                 <img src="https://picsum.photos/100/100"
                                                      th:src="@{${blog.user.avatar}}" alt=""
                                                      class="ui avatar image">
-                                                <div class="content"><a href="#" class="header"
-                                                                        th:text="${blog.user.nickname}">张俊栋</a>
+                                                <div class="content"><a href="#" th:href="@{/about}" target="_blank"
+                                                                        class="header" th:text="${blog.user.nickname}">张俊栋</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -134,10 +134,12 @@
             <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
                 <div class="ui middle aligned two column grid">
                     <div class="column">
-                        <a href="#" th:href="@{'/tags/'+${activeTagId}(page=${page.number}-1)}"  th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
+                        <a href="#" th:href="@{'/tags/'+${activeTagId}(page=${page.number}-1)}"
+                           th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
                     </div>
                     <div class="right aligned column">
-                        <a href="#" th:href="@{'/tags/'+${activeTagId}(page=${page.number}+1)}"  th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
+                        <a href="#" th:href="@{'/tags/'+${activeTagId}(page=${page.number}+1)}" th:unless="${page.last}"
+                           class="ui mini teal basic button">下一页</a>
                     </div>
                 </div>
             </div>
