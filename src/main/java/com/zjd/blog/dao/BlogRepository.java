@@ -17,4 +17,13 @@ public interface BlogRepository extends JpaRepository<Blog, Long>, JpaSpecificat
     /*全局搜索*/
     @Query("select b from Blog b where b.title like ?1 or b.content like ?1")
     Page<Blog> findByQuery(String query, Pageable pageable);
+
+    /*todo,浏览次数没有做*/
+
+
+    @Query("select function('date_format',b.createTime,'%Y') as year from Blog b group by function('date_format',b.createTime,'%Y') order by year desc ")
+    List<String> findGroupYear();
+
+    @Query("select b from Blog b where function('date_format',b.createTime,'%Y') = ?1 order by b.createTime desc ")
+    List<Blog> findByYear(String year);
 }

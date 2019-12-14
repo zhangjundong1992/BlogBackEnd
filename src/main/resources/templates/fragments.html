@@ -19,10 +19,11 @@
             <div class="ui inverted secondary stackable menu">
                 <h2 class="ui teal header item">Blog</h2>
                 <a href="#" th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==1}? 'active'"><i
-                        class="home icon"></i> 首页</a>
+                        class="home icon"></i> <span th:text="#{nav.index}"></span></a>
                 <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${n==2}? 'active'"><i
                         class="idea icon"></i>分类</a>
-                <a href="#" th:href="@{/tags/-1}" class="m-item item m-mobile-hide" th:classappend="${n==3}? 'active'"><i
+                <a href="#" th:href="@{/tags/-1}" class="m-item item m-mobile-hide"
+                   th:classappend="${n==3}? 'active'"><i
                         class="tags icon"></i> 标签</a>
                 <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n==4}? 'active'"><i
                         class="clone icon"></i> 归档</a>
@@ -56,18 +57,18 @@
                 </div>
                 <div class="four wide column">
                     <h4 class="ui inverted header m-text-thin m-spaced">最新博客</h4>
-                    <div class="ui inverted link list">
-                        <a href="#" class="item m-text-thin m-spaced ">你真的理解什么是财富自由吗？</a>
-                        <a href="#" class="item m-text-thin m-spaced ">你真的理解什么是财富自由吗？</a>
-                        <a href="#" class="item m-text-thin m-spaced ">你真的理解什么是财富自由吗？</a>
-
+                    <div id="newblog-container">
+                        <div class="ui inverted link list" th:fragment="newblogList">
+                            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item m-text-thin"
+                               th:each="blog : ${newblogs}" th:text="${blog.title}">用户故事（User Story）</a>
+                        </div>
                     </div>
                 </div>
                 <div class="four wide column">
                     <h4 class="ui inverted header m-text-thin m-spaced ">联系我</h4>
                     <div class="ui inverted link list">
-                        <a href="#" class="item m-text-thin m-spaced ">QQ:925767666</a>
-                        <a href="#" class="item m-text-thin m-spaced ">Email:925767666@qq.com</a>
+                        <a href="#" class="item m-text-thin m-spaced" th:text="#{index.qq}">QQ:925767666</a>
+                        <a href="#" class="item m-text-thin m-spaced" th:text="#{index.email}">Email:925767666@qq.com</a>
 
                     </div>
                 </div>
@@ -89,6 +90,9 @@
         <script th:src="@{/lib/tocbot/tocbot.min.js}"></script>
         <script th:src="@{/lib/qrcode/qrcode.min.js}"></script>
         <script th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+        <script>
+            $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
+        </script>
     </th:block>
 </body>
 </html>

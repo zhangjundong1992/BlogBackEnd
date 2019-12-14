@@ -103,7 +103,7 @@
                     </a>
                 </div>
                 <!--赞赏-->
-                <div class="ui center aligned basic segment">
+                <div class="ui center aligned basic segment" th:if="${blog.appreciable}">
                     <button id="payBtn"
                             class="ui orange basic circular button">
                         赞赏
@@ -128,7 +128,7 @@
                 </div>
             </div>
             <!--博客信息-->
-            <div class="ui attached positive message">
+            <div class="ui attached positive message" th:if="${blog.shareable}">
                 <div class="ui middle aligned grid">
                     <div class="eleven wide column">
                         <ui class=" list">
@@ -147,8 +147,7 @@
                 </div>
             </div>
             <!--留言-->
-            <div id="comment-container"
-                 class="ui bottom attached segment">
+            <div id="comment-container" class="ui bottom attached segment" th:if="${blog.commentable}">
                 <div class="ui teal segment">
                     <div class="ui comments">
                         <h3 class="ui dividing header">Comments</h3>
@@ -352,14 +351,10 @@
             position: 'bottom center'
         });
         tocbot.init({
-            // Where to render the table of contents.
             tocSelector: '.js-toc',
-            // Where to grab the headings to build the table of contents.
             contentSelector: '.js-toc-content',
-            // Which headings to grab inside of the contentSelector element.
             headingSelector: 'h1, h2, h3',
-            // For headings inside relative or absolute positioned containers within content.
-            hasInnerContainers: true,
+            hasInnerContainers: true
         });
         $('#toc-btn').popup({
             popup: $('.toc-container.popup'),
@@ -373,20 +368,10 @@
         $('#toTop').click(function () {
             $(window).scrollTo(0, 500)
         });
-        // var waypoint = new Waypoint({
-        //     element: document.getElementById('waypoint'),
-        //     handler: function (direction) {
-        //         if (direction == 'down') {
-        //             $('#toolBar').show(500);
-        //         }
-        //         else {
-        //             $('#toolBar').hide(500);
-        //         }
-        //     }
-        // })
     </script>
+    <!--生成博客的二维码-->
     <script type="text/javascript" th:inline="javascript">
-        var serurl = "127.0.0.1:8080";
+        var serurl = /*[[#{blog.serurl}]]*/"127.0.0.1:8080";
         var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
         var qrcode = new QRCode(document.getElementById("qrcode"), {
             text: serurl + url,
