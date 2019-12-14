@@ -1,4 +1,4 @@
-package com.zjd.blog.exception;
+package com.zjd.blog.util.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

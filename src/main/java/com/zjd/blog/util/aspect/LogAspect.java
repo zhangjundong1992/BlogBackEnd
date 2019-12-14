@@ -1,4 +1,4 @@
-package com.zjd.blog.aspect;
+package com.zjd.blog.util.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;

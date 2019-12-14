@@ -1,4 +1,4 @@
-package com.zjd.blog.interceptor;
+package com.zjd.blog.util.interceptor;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 

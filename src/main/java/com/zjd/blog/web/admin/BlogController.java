@@ -1,11 +1,11 @@
 package com.zjd.blog.web.admin;
 
-import com.zjd.blog.po.Blog;
-import com.zjd.blog.po.User;
+import com.zjd.blog.dao.po.Blog;
+import com.zjd.blog.dao.po.User;
 import com.zjd.blog.service.BlogService;
 import com.zjd.blog.service.TagService;
 import com.zjd.blog.service.TypeService;
-import com.zjd.blog.vo.BlogQuery;
+import com.zjd.blog.dao.vo.BlogQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

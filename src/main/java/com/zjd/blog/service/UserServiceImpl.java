@@ -1,7 +1,7 @@
 package com.zjd.blog.service;
 
 import com.zjd.blog.dao.UserRepository;
-import com.zjd.blog.po.User;
+import com.zjd.blog.dao.po.User;
 import com.zjd.blog.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.zjd.blog.web;
 
 
-import com.zjd.blog.po.Tag;
+import com.zjd.blog.dao.po.Tag;
 import com.zjd.blog.service.BlogService;
 import com.zjd.blog.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;

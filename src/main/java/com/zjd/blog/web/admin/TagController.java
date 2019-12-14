@@ -1,6 +1,6 @@
 package com.zjd.blog.web.admin;
 
-import com.zjd.blog.po.Tag;
+import com.zjd.blog.dao.po.Tag;
 import com.zjd.blog.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;

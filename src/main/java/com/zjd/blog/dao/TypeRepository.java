@@ -1,6 +1,6 @@
 package com.zjd.blog.dao;
 
-import com.zjd.blog.po.Type;
+import com.zjd.blog.dao.po.Type;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

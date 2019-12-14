@@ -1,12 +1,12 @@
 package com.zjd.blog.service;
 
-import com.zjd.blog.exception.NotFoundException;
+import com.zjd.blog.util.exception.NotFoundException;
 import com.zjd.blog.dao.BlogRepository;
-import com.zjd.blog.po.Blog;
-import com.zjd.blog.po.Type;
+import com.zjd.blog.dao.po.Blog;
+import com.zjd.blog.dao.po.Type;
 import com.zjd.blog.util.MarkdownUtils;
 import com.zjd.blog.util.MyBeanUtils;
-import com.zjd.blog.vo.BlogQuery;
+import com.zjd.blog.dao.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

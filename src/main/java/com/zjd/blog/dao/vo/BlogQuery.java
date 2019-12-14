@@ -1,4 +1,4 @@
-package com.zjd.blog.vo;
+package com.zjd.blog.dao.vo;
 
 public class BlogQuery {
     private String title;

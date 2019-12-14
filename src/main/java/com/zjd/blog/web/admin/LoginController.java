@@ -1,6 +1,6 @@
 package com.zjd.blog.web.admin;
 
-import com.zjd.blog.po.User;
+import com.zjd.blog.dao.po.User;
 import com.zjd.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

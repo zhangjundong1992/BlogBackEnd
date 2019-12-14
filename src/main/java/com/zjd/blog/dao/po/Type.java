@@ -1,4 +1,4 @@
-package com.zjd.blog.po;
+package com.zjd.blog.dao.po;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
